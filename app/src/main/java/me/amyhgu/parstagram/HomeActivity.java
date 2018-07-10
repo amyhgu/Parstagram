@@ -38,7 +38,7 @@ import me.amyhgu.parstagram.model.Post;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_173036.jpg";
+    private static String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_173036.jpg";
     private EditText descriptionInput;
     private Button createButton;
     private Button feedButton;
@@ -221,6 +221,7 @@ public class HomeActivity extends AppCompatActivity {
                 // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
                 File resizedUri = getPhotoFileUri(photoFileName + "_resized");
                 File resizedFile = new File(resizedUri.getPath());
+                imagePath = resizedUri.getPath();
 
                 Log.d("CameraActivity", "resizing successful");
                 try {
@@ -247,7 +248,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 // Load the taken image into a preview
                 ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-                ivPreview.setImageBitmap(takenImage);
+                ivPreview.setImageBitmap(resizedBitmap);
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
