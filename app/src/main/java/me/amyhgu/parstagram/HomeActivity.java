@@ -220,8 +220,8 @@ public class HomeActivity extends AppCompatActivity {
                 resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
                 // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
                 File resizedUri = getPhotoFileUri(photoFileName + "_resized");
-                File resizedFile = new File(resizedUri.getPath());
                 imagePath = resizedUri.getPath();
+                File resizedFile = new File(imagePath);
 
                 Log.d("CameraActivity", "resizing successful");
                 try {

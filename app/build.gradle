@@ -36,5 +36,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     // Parse render images
     implementation 'com.parse:parseui-widget-android:0.0.2'
-    // swipe to refresh
+    // parceler
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
+    // prettytime
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 }

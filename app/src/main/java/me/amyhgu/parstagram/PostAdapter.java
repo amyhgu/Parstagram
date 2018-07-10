@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.parceler.Parcels;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -106,12 +108,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 //                } else if (view.getId() == ivRetweet.getId()) {
 //                    helper.retweetItem(tweet, client, ivRetweet);
 //                } else {
-//                    // create intent for the new activity
-//                    Intent intent = new Intent(context, DetailsActivity.class);
-//                    // serialize the tweet using parceler, use its short name as a key
-//                    intent.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
-//                    // show the activity
-//                    context.startActivity(intent);
+                    // create intent for the new activity
+                    Intent intent = new Intent(context, DetailsActivity.class);
+                    // pass extras
+                    intent.putExtra("username", post.getUser().getUsername());
+                    intent.putExtra("description", post.getDescription());
+                    intent.putExtra("image", post.getImage().getUrl());
+                    intent.putExtra("timestamp", post.getRelativeTimestamp());
+                // show the activity
+                    context.startActivity(intent);
 //                }
             }
         }
