@@ -16,20 +16,21 @@ public class ParseApplication extends Application {
 
         ParseObject.registerSubclass(Post.class);
 
-//        // Use for troubleshooting -- remove this line for production
-//        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
-//
-//        // Use for monitoring Parse OkHttp traffic
-//        // Can be Level.BASIC, Level.HEADERS, or Level.BODY
-//        // See http://square.github.io/okhttp/3.x/logging-interceptor/ to see the options.
-//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-//        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-//        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        builder.networkInterceptors().add(httpLoggingInterceptor);
+        // Use for troubleshooting -- remove this line for production
+        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
+
+        // Use for monitoring Parse OkHttp traffic
+        // Can be Level.BASIC, Level.HEADERS, or Level.BODY
+        // See http://square.github.io/okhttp/3.x/logging-interceptor/ to see the options.
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.networkInterceptors().add(httpLoggingInterceptor);
 
         final Parse.Configuration config = new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.app_id)) // should correspond to APP_ID env variable
                 .clientKey(getString(R.string.master_key))  // set explicitly unless clientKey is explicitly configured on Parse server
+                .clientBuilder(builder)
                 .server(getString(R.string.server_url))
                 .build();
 
