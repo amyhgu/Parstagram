@@ -36,4 +36,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     // Parse render images
     implementation 'com.parse:parseui-widget-android:0.0.2'
+    // swipe to refresh
 }
