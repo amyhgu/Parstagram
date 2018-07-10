@@ -43,4 +43,20 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="Logout" />
+
+    <ImageView
+        android:id="@+id/ivPreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/etDescription"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@color/ig_purple" />
+
+    <Button
+        android:id="@+id/btCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ivPreview"
+        android:layout_centerHorizontal="true"
+        android:text="New Pic" />
 </RelativeLayout>
