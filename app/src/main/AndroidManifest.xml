@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_instagram_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="me.amyhgu.parstagram.fileprovider"
@@ -32,7 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".FeedActivity"></activity>
     </application>
 
 </manifest>

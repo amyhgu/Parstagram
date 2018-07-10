@@ -165,7 +165,7 @@
     <color name="ig_led_color">#fff4bb41</color>
     <color name="ig_purple">#c40092</color>
     <color name="ig_red">#ffe40031</color>
-    <color name="ig_yellow">#ffffd521</color>
+    <color name="ig_yellow">#ffd521</color>
     <color name="iglive_ssi_banner_gradient_end">#99585bc2</color>
     <color name="iglive_ssi_banner_gradient_start">#99a02ea2</color>
     <color name="image_placeholder">@color/grey_1</color>

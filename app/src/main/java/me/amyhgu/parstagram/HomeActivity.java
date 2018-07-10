@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button cameraButton;
 
     public final String APP_TAG = "Parstagram";
-    public final int SOME_WIDTH = 720;
+    public final int SOME_WIDTH = 360;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
