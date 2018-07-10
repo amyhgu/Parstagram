@@ -66,7 +66,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 //        }
 
         Glide.with(context)
-                .load(post.getImage())
+                .load(post.getImage().getUrl())
                 .into(holder.ivPicture);
     }
 

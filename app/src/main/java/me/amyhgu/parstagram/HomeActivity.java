@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -42,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_173036.jpg";
     private EditText descriptionInput;
     private Button createButton;
-    private Button refreshButton;
+    private Button feedButton;
     private Button logoutButton;
     private Button cameraButton;
 
@@ -59,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
 
         descriptionInput = findViewById(R.id.etDescription);
         createButton = findViewById(R.id.btCreate);
-        refreshButton = findViewById(R.id.btRefresh);
+        feedButton = findViewById(R.id.btFeed);
         logoutButton = findViewById(R.id.btLogout);
         cameraButton = findViewById(R.id.btCamera);
 
@@ -77,10 +76,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        refreshButton.setOnClickListener(new View.OnClickListener() {
+        feedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadTopPosts();
+                Intent intent = new Intent(HomeActivity.this, FeedActivity.class);
+                startActivity(intent);
             }
         });
 

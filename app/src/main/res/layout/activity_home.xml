@@ -6,25 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="Enter a description"
-        android:layout_margin="10dp"
-        android:inputType="textPersonName" />
-
     <Button
-        android:id="@+id/btRefresh"
+        android:id="@+id/btFeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="Refresh" />
+        android:layout_margin="5dp"
+        android:text="See Feed" />
 
     <Button
         android:id="@+id/btCreate"
@@ -32,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_above="@+id/btRefresh"
+        android:layout_above="@+id/btFeed"
         android:layout_alignParentStart="true"
         android:text="Create" />
 
@@ -48,15 +37,28 @@
         android:id="@+id/ivPreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etDescription"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         app:srcCompat="@color/ig_purple" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ivPreview"
+        android:ems="10"
+        android:hint="Enter a description"
+        android:layout_margin="10dp"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_above="@+id/ivPreview"
         android:layout_centerHorizontal="true"
         android:text="New Pic" />
+
 </RelativeLayout>
