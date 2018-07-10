@@ -19,7 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/instagram_android_assets/icon.png" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/instagram_android_assets/drawable-xxhdpi/nav_logo_whiteout.png" />
+                                      <entry key="outputName" value="ic_nav_logo_whiteout" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -39,6 +40,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
