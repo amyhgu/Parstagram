@@ -28,7 +28,11 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import me.amyhgu.parstagram.model.Post;
@@ -43,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button cameraButton;
 
     public final String APP_TAG = "Parstagram";
+    public final int SOME_WIDTH = 720;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
@@ -205,7 +210,41 @@ public class HomeActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+
                 // RESIZE BITMAP, see section below
+                // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
+                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, SOME_WIDTH);
+                // Configure byte output stream
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                // Compress the image further
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+                // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
+                File resizedUri = getPhotoFileUri(photoFileName + "_resized");
+                File resizedFile = new File(resizedUri.getPath());
+
+                Log.d("CameraActivity", "resizing successful");
+                try {
+                    resizedFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(resizedFile);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                // Write the bytes of the bitmap to file
+                try {
+                    fos.write(bytes.toByteArray());
+                    fos.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("CameraActivity", "loading successful");
+
                 // Load the taken image into a preview
                 ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
                 ivPreview.setImageBitmap(takenImage);
