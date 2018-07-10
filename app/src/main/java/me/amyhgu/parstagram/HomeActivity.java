@@ -1,5 +1,10 @@
 package me.amyhgu.parstagram;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +26,7 @@ import me.amyhgu.parstagram.model.Post;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static final String imagePath = "/Users/amygu/Desktop/twitterTest.jpg";
+    private static final String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_173036.jpg";
     private EditText descriptionInput;
     private Button createButton;
     private Button refreshButton;
@@ -35,6 +40,13 @@ public class HomeActivity extends AppCompatActivity {
         createButton = findViewById(R.id.btCreate);
         refreshButton = findViewById(R.id.btRefresh);
 
+        if (Build.VERSION.SDK_INT >= 23) {
+            int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        }
+
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,8 +55,16 @@ public class HomeActivity extends AppCompatActivity {
 
                 final File file = new File(imagePath);
                 final ParseFile parseFile = new ParseFile(file);
-
-                createPost(description, parseFile, user);
+                parseFile.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            createPost(description, parseFile, user);
+                        } else {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
         });
 
@@ -72,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        })
+        });
     }
 
     private void loadTopPosts() {
