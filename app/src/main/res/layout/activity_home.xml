@@ -35,4 +35,12 @@
         android:layout_above="@+id/btRefresh"
         android:layout_alignParentStart="true"
         android:text="Create" />
+
+    <Button
+        android:id="@+id/btLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="Logout" />
 </RelativeLayout>

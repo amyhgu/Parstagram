@@ -1,6 +1,7 @@
 package me.amyhgu.parstagram;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private EditText descriptionInput;
     private Button createButton;
     private Button refreshButton;
+    private Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         descriptionInput = findViewById(R.id.etDescription);
         createButton = findViewById(R.id.btCreate);
         refreshButton = findViewById(R.id.btRefresh);
+        logoutButton = findViewById(R.id.btLogout);
 
         if (Build.VERSION.SDK_INT >= 23) {
             int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -50,21 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String description = descriptionInput.getText().toString();
-                final ParseUser user = ParseUser.getCurrentUser();
-
-                final File file = new File(imagePath);
-                final ParseFile parseFile = new ParseFile(file);
-                parseFile.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            createPost(description, parseFile, user);
-                        } else {
-                            e.printStackTrace();
-                        }
-                    }
-                });
+                createNewPost();
             }
         });
 
@@ -72,6 +61,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadTopPosts();
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutUser();
             }
         });
     }
@@ -113,5 +109,33 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void createNewPost() {
+        final String description = descriptionInput.getText().toString();
+        final ParseUser user = ParseUser.getCurrentUser();
+
+        final File file = new File(imagePath);
+        final ParseFile parseFile = new ParseFile(file);
+        parseFile.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    createPost(description, parseFile, user);
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void logoutUser() {
+        ParseUser.logOut();
+        ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+        Log.d("HomeActivity", "Logout successful");
+
+        final Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
