@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
     private static String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_173036.jpg";
     private EditText descriptionInput;
     private Button createButton;
-    private Button feedButton;
+//    private Button feedButton;
     private Button logoutButton;
     private Button cameraButton;
 
@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
 
         descriptionInput = findViewById(R.id.etDescription);
         createButton = findViewById(R.id.btCreate);
-        feedButton = findViewById(R.id.btFeed);
+//        feedButton = findViewById(R.id.btFeed);
         logoutButton = findViewById(R.id.btLogout);
         cameraButton = findViewById(R.id.btCamera);
 
@@ -90,18 +90,19 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_feed:
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.flContainer, fragment1).commit();
+                        FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+                        fragmentTransaction1.replace(R.id.flContainer, fragment1).commit();
                         return true;
                     case R.id.action_camera:
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.flContainer, fragment2).commit();
+                        FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
+                        fragmentTransaction2.replace(R.id.flContainer, fragment2).commit();
                         return true;
                     case R.id.action_profile:
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.flContainer, fragment3).commit();
+                        FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
+                        fragmentTransaction3.replace(R.id.flContainer, fragment3).commit();
                         return true;
                 }
+                return false;
             }
         });
 
@@ -112,13 +113,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        feedButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, FeedActivity.class);
-                startActivity(intent);
-            }
-        });
+//        feedButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(HomeActivity.this, FeedActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
