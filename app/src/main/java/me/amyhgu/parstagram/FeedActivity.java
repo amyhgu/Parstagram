@@ -34,7 +34,9 @@ public class FeedActivity extends AppCompatActivity {
 
         postAdapter = new PostAdapter(posts);
         // set up RecyclerView (layout manager, use adapter)
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        rvPosts.setLayoutManager(layoutManager);
         // set adapter
         rvPosts.setAdapter(postAdapter);
 

@@ -110,6 +110,11 @@ public class HomeActivity extends AppCompatActivity
         finish();
     }
 
+    public void onCreateButtonSelected() {
+        FragmentTransaction fragmentTransactionFeed = getSupportFragmentManager().beginTransaction();
+        fragmentTransactionFeed.replace(R.id.flContainer, new FeedFragment()).commit();
+    }
+
     public void onLaunchCamera(View view) {
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

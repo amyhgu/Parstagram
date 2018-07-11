@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -49,6 +50,7 @@ public class CaptureFragment extends Fragment {
     public interface OnCameraSelectedListener {
         // This can be any number of events to be sent to the activity
         public void onCameraButtonSelected(View view);
+        void onCreateButtonSelected();
     }
 
     // This event fires 1st, before creation of fragment or any views
@@ -90,7 +92,6 @@ public class CaptureFragment extends Fragment {
         createButton = view.findViewById(R.id.btCreate);
         cameraButton = view.findViewById(R.id.btCamera);
         ivPreview = (ImageView) view.findViewById(R.id.ivPreview);
-
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,6 +159,9 @@ public class CaptureFragment extends Fragment {
                 }
             }
         });
+
+        listener.onCreateButtonSelected();
+        Toast.makeText(getContext(), "Posted to feed", Toast.LENGTH_SHORT).show();
     }
 
     public void resizePhoto(File photoFile) {
