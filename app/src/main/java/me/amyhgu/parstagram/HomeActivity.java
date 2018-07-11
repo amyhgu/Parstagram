@@ -72,10 +72,7 @@ public class HomeActivity extends AppCompatActivity implements CaptureFragment.O
         fragment2 = new CaptureFragment();
         fragment3 = new ProfileFragment();
 
-        descriptionInput = findViewById(R.id.etDescription);
-        createButton = findViewById(R.id.btCreate);
         logoutButton = findViewById(R.id.btLogout);
-        cameraButton = findViewById(R.id.btCamera);
 
         if (Build.VERSION.SDK_INT >= 23) {
             int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -107,93 +104,21 @@ public class HomeActivity extends AppCompatActivity implements CaptureFragment.O
             }
         });
 
-//        createButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                createNewPost();
-//            }
-//        });
-
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logoutUser();
             }
         });
-
-//        cameraButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onLaunchCamera(view);
-//            }
-//        });
     }
 
     // Now we can define the action to take in the activity when the fragment event fires
     // This is implementing the `OnItemSelectedListener` interface methods
     @Override
     public void onCameraButtonSelected(View view) {
-//        if (fragment2 != null && fragment2.isInLayout()) {
-            onLaunchCamera(view);
-//        }
+        onLaunchCamera(view);
     }
 
-//    private void createPost(String description, ParseFile imageFile, ParseUser user) {
-//        final Post newPost = new Post();
-//        newPost.setDescription(description);
-//        newPost.setImage(imageFile);
-//        newPost.setUser(user);
-//
-//        newPost.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e == null) {
-//                    Log.d("HomeActivity", "Create post success");
-//                } else {
-//                    Log.e("HomeActivity", "Create post failure");
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-
-//    private void loadTopPosts() {
-//        final Post.Query postsQuery = new Post.Query();
-//        postsQuery.getTop().withUser();
-//
-//        postsQuery.findInBackground(new FindCallback<Post>() {
-//            @Override
-//            public void done(List<Post> objects, ParseException e) {
-//                if (e == null) {
-//                    for (int i = 0; i < objects.size(); i++) {
-//                        Log.d("HomeActivity", "Post[" + i + "] = "
-//                                + objects.get(i).getDescription()
-//                                + "\nusername = " + objects.get(i).getUser().getUsername());
-//                    }
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-
-//    private void createNewPost() {
-//        final String description = descriptionInput.getText().toString();
-//        final ParseUser user = ParseUser.getCurrentUser();
-//
-//        final File file = new File(imagePath);
-//        final ParseFile parseFile = new ParseFile(file);
-//        parseFile.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e == null) {
-//                    createPost(description, parseFile, user);
-//                } else {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     private void logoutUser() {
         ParseUser.logOut();

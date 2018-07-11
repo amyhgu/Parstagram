@@ -38,7 +38,6 @@ public class CaptureFragment extends Fragment {
     private static String imagePath = "";
     private EditText descriptionInput;
     private Button createButton;
-    private Button logoutButton;
     private Button cameraButton;
     private ImageView ivPreview;
 
@@ -89,7 +88,6 @@ public class CaptureFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         descriptionInput = view.findViewById(R.id.etDescription);
         createButton = view.findViewById(R.id.btCreate);
-        logoutButton = view.findViewById(R.id.btLogout);
         cameraButton = view.findViewById(R.id.btCamera);
         ivPreview = (ImageView) view.findViewById(R.id.ivPreview);
 
