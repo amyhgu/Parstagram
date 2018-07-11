@@ -44,7 +44,7 @@ import me.amyhgu.parstagram.model.Post;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private static String imagePath = "/storage/emulated/0/DCIM/Camera/IMG_20180709_173036.jpg";
+    private static String imagePath = "";
     private EditText descriptionInput;
     private Button createButton;
 //    private Button feedButton;
