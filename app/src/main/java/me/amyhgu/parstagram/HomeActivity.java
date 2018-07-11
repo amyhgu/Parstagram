@@ -42,17 +42,20 @@ import java.util.List;
 
 import me.amyhgu.parstagram.model.Post;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements CaptureFragment.OnCameraSelectedListener {
+
+    Fragment fragment1;
+    Fragment fragment2;
+    Fragment fragment3;
 
     private static String imagePath = "";
     private EditText descriptionInput;
     private Button createButton;
-//    private Button feedButton;
     private Button logoutButton;
     private Button cameraButton;
 
     public final String APP_TAG = "Parstagram";
-    public final int SOME_WIDTH = 360;
+    public final int SOME_WIDTH = 720;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
@@ -65,14 +68,12 @@ public class HomeActivity extends AppCompatActivity {
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         // define your fragments here
-        final Fragment fragment1 = new FeedFragment();
-        final Fragment fragment2 = new CaptureFragment();
-        final Fragment fragment3 = new ProfileFragment();
-
+        fragment1 = new FeedFragment();
+        fragment2 = new CaptureFragment();
+        fragment3 = new ProfileFragment();
 
         descriptionInput = findViewById(R.id.etDescription);
         createButton = findViewById(R.id.btCreate);
-//        feedButton = findViewById(R.id.btFeed);
         logoutButton = findViewById(R.id.btLogout);
         cameraButton = findViewById(R.id.btCamera);
 
@@ -106,18 +107,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewPost();
-            }
-        });
-
-//        feedButton.setOnClickListener(new View.OnClickListener() {
+//        createButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-//                Intent intent = new Intent(HomeActivity.this, FeedActivity.class);
-//                startActivity(intent);
+//                createNewPost();
 //            }
 //        });
 
@@ -128,70 +121,79 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onLaunchCamera(view);
-            }
-        });
+//        cameraButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onLaunchCamera(view);
+//            }
+//        });
     }
 
-    private void createPost(String description, ParseFile imageFile, ParseUser user) {
-        final Post newPost = new Post();
-        newPost.setDescription(description);
-        newPost.setImage(imageFile);
-        newPost.setUser(user);
-
-        newPost.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("HomeActivity", "Create post success");
-                } else {
-                    Log.e("HomeActivity", "Create post failure");
-                    e.printStackTrace();
-                }
-            }
-        });
+    // Now we can define the action to take in the activity when the fragment event fires
+    // This is implementing the `OnItemSelectedListener` interface methods
+    @Override
+    public void onCameraButtonSelected(View view) {
+//        if (fragment2 != null && fragment2.isInLayout()) {
+            onLaunchCamera(view);
+//        }
     }
 
-    private void loadTopPosts() {
-        final Post.Query postsQuery = new Post.Query();
-        postsQuery.getTop().withUser();
+//    private void createPost(String description, ParseFile imageFile, ParseUser user) {
+//        final Post newPost = new Post();
+//        newPost.setDescription(description);
+//        newPost.setImage(imageFile);
+//        newPost.setUser(user);
+//
+//        newPost.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    Log.d("HomeActivity", "Create post success");
+//                } else {
+//                    Log.e("HomeActivity", "Create post failure");
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
-        postsQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
-                    }
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    private void loadTopPosts() {
+//        final Post.Query postsQuery = new Post.Query();
+//        postsQuery.getTop().withUser();
+//
+//        postsQuery.findInBackground(new FindCallback<Post>() {
+//            @Override
+//            public void done(List<Post> objects, ParseException e) {
+//                if (e == null) {
+//                    for (int i = 0; i < objects.size(); i++) {
+//                        Log.d("HomeActivity", "Post[" + i + "] = "
+//                                + objects.get(i).getDescription()
+//                                + "\nusername = " + objects.get(i).getUser().getUsername());
+//                    }
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
-    private void createNewPost() {
-        final String description = descriptionInput.getText().toString();
-        final ParseUser user = ParseUser.getCurrentUser();
-
-        final File file = new File(imagePath);
-        final ParseFile parseFile = new ParseFile(file);
-        parseFile.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    createPost(description, parseFile, user);
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    private void createNewPost() {
+//        final String description = descriptionInput.getText().toString();
+//        final ParseUser user = ParseUser.getCurrentUser();
+//
+//        final File file = new File(imagePath);
+//        final ParseFile parseFile = new ParseFile(file);
+//        parseFile.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    createPost(description, parseFile, user);
+//                } else {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     private void logoutUser() {
         ParseUser.logOut();
@@ -245,47 +247,8 @@ public class HomeActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // by this point we have the camera photo on disk
-                Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-
-                // RESIZE BITMAP, see section below
-                // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
-                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, SOME_WIDTH);
-                // Configure byte output stream
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                // Compress the image further
-                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-                // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
-                File resizedUri = getPhotoFileUri(photoFileName + "_resized");
-                imagePath = resizedUri.getPath();
-                File resizedFile = new File(imagePath);
-
-                Log.d("CameraActivity", "resizing successful");
-                try {
-                    resizedFile.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(resizedFile);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                // Write the bytes of the bitmap to file
-                try {
-                    fos.write(bytes.toByteArray());
-                    fos.close();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                Log.d("CameraActivity", "loading successful");
-
-                // Load the taken image into a preview
-                ImageView ivPreview = (ImageView) findViewById(R.id.ivPreview);
-                ivPreview.setImageBitmap(resizedBitmap);
+                CaptureFragment fragment2 = (CaptureFragment) getSupportFragmentManager().findFragmentById(R.id.flContainer);
+                fragment2.resizePhoto(photoFile);
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
