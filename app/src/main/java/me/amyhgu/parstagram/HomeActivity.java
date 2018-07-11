@@ -42,20 +42,14 @@ import java.util.List;
 
 import me.amyhgu.parstagram.model.Post;
 
-public class HomeActivity extends AppCompatActivity implements CaptureFragment.OnCameraSelectedListener {
+public class HomeActivity extends AppCompatActivity
+        implements CaptureFragment.OnCameraSelectedListener, ProfileFragment.OnLogoutSelectedListener {
 
     Fragment fragment1;
     Fragment fragment2;
     Fragment fragment3;
 
-    private static String imagePath = "";
-    private EditText descriptionInput;
-    private Button createButton;
-    private Button logoutButton;
-    private Button cameraButton;
-
     public final String APP_TAG = "Parstagram";
-    public final int SOME_WIDTH = 720;
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
@@ -71,8 +65,6 @@ public class HomeActivity extends AppCompatActivity implements CaptureFragment.O
         fragment1 = new FeedFragment();
         fragment2 = new CaptureFragment();
         fragment3 = new ProfileFragment();
-
-        logoutButton = findViewById(R.id.btLogout);
 
         if (Build.VERSION.SDK_INT >= 23) {
             int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -103,13 +95,6 @@ public class HomeActivity extends AppCompatActivity implements CaptureFragment.O
                 return false;
             }
         });
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutUser();
-            }
-        });
     }
 
     // Now we can define the action to take in the activity when the fragment event fires
@@ -119,12 +104,7 @@ public class HomeActivity extends AppCompatActivity implements CaptureFragment.O
         onLaunchCamera(view);
     }
 
-
-    private void logoutUser() {
-        ParseUser.logOut();
-        ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
-        Log.d("HomeActivity", "Logout successful");
-
+    public void onLogoutButtonSelected() {
         final Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
