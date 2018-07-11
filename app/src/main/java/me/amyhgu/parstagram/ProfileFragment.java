@@ -3,6 +3,7 @@ package me.amyhgu.parstagram;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -11,18 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
 
-    private OnLogoutSelectedListener listener;
+    private OnItemSelectedListener listener;
     private Button logoutButton;
+    private ImageView ivProfilePic;
 
-    public interface OnLogoutSelectedListener {
+    public interface OnItemSelectedListener {
         // This can be any number of events to be sent to the activity
         public void onLogoutButtonSelected();
+        void onProfilePictureSelected();
     }
 
     // This event fires 1st, before creation of fragment or any views
@@ -31,8 +35,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnLogoutSelectedListener) {
-            listener = (OnLogoutSelectedListener) context;
+        if (context instanceof OnItemSelectedListener) {
+            listener = (OnItemSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement ProfileFragment.OnLogoutSelectedListener");
@@ -61,6 +65,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         logoutButton = view.findViewById(R.id.btLogout);
+        ivProfilePic = view.findViewById(R.id.ivProfilePic);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +73,12 @@ public class ProfileFragment extends Fragment {
                 logoutUser();
             }
         });
-
+        ivProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onProfilePictureSelected();
+            }
+        });
     }
 
     // This method is called when the fragment is no longer connected to the Activity
@@ -93,5 +103,9 @@ public class ProfileFragment extends Fragment {
         Log.d("HomeActivity", "Logout successful");
 
         listener.onLogoutButtonSelected();
+    }
+
+    public void setProfilePicture(Bitmap bitmap) {
+        ivProfilePic.setImageBitmap(bitmap);
     }
 }

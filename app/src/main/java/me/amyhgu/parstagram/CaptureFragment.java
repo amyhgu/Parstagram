@@ -164,6 +164,10 @@ public class CaptureFragment extends Fragment {
         Toast.makeText(getContext(), "Posted to feed", Toast.LENGTH_SHORT).show();
     }
 
+    public void setPreviewImage(Bitmap bitmap) {
+        ivPreview.setImageBitmap(bitmap);
+    }
+
     public void resizePhoto(File photoFile) {
         // by this point we have the camera photo on disk
         Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
