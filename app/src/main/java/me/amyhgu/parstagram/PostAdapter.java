@@ -59,6 +59,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         // populate views according to the data
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvDescription.setText(post.getDescription());
+        holder.tvCommentName.setText(post.getUser().getUsername());
 
         Glide.with(context)
                 .load(post.getImage().getUrl())
@@ -90,6 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ImageView ivPropic;
         TextView tvUsername;
         TextView tvDescription;
+        TextView tvCommentName;
         private WeakReference<ClickListener> listenerRef;
 
         public ViewHolder(View itemView, ClickListener listener) {
@@ -97,6 +99,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             // perform findViewById lookups
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
+            tvCommentName = (TextView) itemView.findViewById(R.id.tvCommentName);
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             ivPropic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
             listenerRef = new WeakReference<>(listener);

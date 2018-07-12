@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -42,6 +43,8 @@ public class ProfileFragment extends Fragment {
     private OnItemSelectedListener listener;
     private Button logoutButton;
     private ImageView ivProfilePic;
+    private TextView tvUsername;
+
     private RecyclerView rvPostGrid;
     static ArrayList<Post> posts;
     private GridAdapter gridAdapter;
@@ -91,7 +94,14 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         logoutButton = view.findViewById(R.id.btLogout);
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
+        tvUsername = view.findViewById(R.id.tvUsername);
         rvPostGrid = view.findViewById(R.id.rvPostGrid);
+
+        rvPostGrid = (RecyclerView) view.findViewById(R.id.rvPostGrid);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
+        rvPostGrid.setLayoutManager(layoutManager);
+        rvPostGrid.setAdapter(gridAdapter);
+        loadUserPosts();
 
         ParseFile propic = user.getParseFile("propic");
         if (propic != null) {
@@ -103,11 +113,7 @@ public class ProfileFragment extends Fragment {
             ivProfilePic.setImageResource(R.drawable.ic_user_filled);
         }
 
-        rvPostGrid = (RecyclerView) view.findViewById(R.id.rvPostGrid);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
-        rvPostGrid.setLayoutManager(layoutManager);
-        rvPostGrid.setAdapter(gridAdapter);
-        loadUserPosts();
+        tvUsername.setText(user.getUsername());
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,9 +198,6 @@ public class ProfileFragment extends Fragment {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
-                        Log.d("ProfileFragment", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
                         Post post = new Post();
                         post.setUser(objects.get(i).getUser());
                         post.setImage(objects.get(i).getImage());

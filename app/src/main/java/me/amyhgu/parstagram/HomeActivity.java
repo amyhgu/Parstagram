@@ -92,8 +92,9 @@ public class HomeActivity extends AppCompatActivity
                         fragmentTransaction2.replace(R.id.flContainer, fragment2).commit();
                         return true;
                     case R.id.action_profile:
-                        FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
-                        fragmentTransaction3.replace(R.id.flContainer, fragment3).commit();
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ProfileFragment profileFragment = ProfileFragment.newInstance(ParseUser.getCurrentUser());
+                        ft.replace(R.id.flContainer, profileFragment).commit();
                         return true;
                 }
                 return false;

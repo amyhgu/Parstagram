@@ -11,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@+id/ivProfilePic"
         android:text="TextView"
         android:textStyle="bold" />
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivProfilePic"
+        android:layout_margin="5dp"
         app:srcCompat="@color/ig_yellow" />
 
     <TextView
@@ -44,6 +47,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
+        android:layout_margin="5dp"
         android:layout_alignParentTop="true"
         app:srcCompat="@drawable/ic_user_filled" />
 </RelativeLayout>
