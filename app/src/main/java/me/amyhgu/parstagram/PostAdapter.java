@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -64,6 +65,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         if (propic != null) {
             Glide.with(context)
                     .load(propic.getUrl())
+                    .apply(RequestOptions.circleCropTransform())
                     .into(holder.ivPropic);
         } else {
             holder.ivPropic.setImageResource(R.drawable.ic_user_filled);
