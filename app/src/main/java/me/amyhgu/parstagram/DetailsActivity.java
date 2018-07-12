@@ -13,11 +13,11 @@ import me.amyhgu.parstagram.model.Post;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    Post post;
     TextView tvUsername;
     TextView tvDescription;
     TextView tvTimestamp;
     ImageView ivPicture;
+    ImageView ivPropic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvTimestamp = (TextView) findViewById(R.id.tvTimestamp);
         ivPicture = (ImageView) findViewById(R.id.ivPicture);
+        ivPropic = (ImageView) findViewById(R.id.ivProfilePic);
 
         tvUsername.setText(getIntent().getStringExtra("username"));
         tvDescription.setText(getIntent().getStringExtra("description"));
@@ -36,5 +37,13 @@ public class DetailsActivity extends AppCompatActivity {
         Glide.with(DetailsActivity.this)
                 .load(getIntent().getStringExtra("image"))
                 .into(ivPicture);
+
+        if (getIntent().getStringExtra("propic") != null) {
+            Glide.with(DetailsActivity.this)
+                    .load(getIntent().getStringExtra("propic"))
+                    .into(ivPropic);
+        } else {
+            ivPropic.setImageResource(R.drawable.ic_user_filled);
+        }
     }
 }

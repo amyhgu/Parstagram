@@ -117,6 +117,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     intent.putExtra("description", post.getDescription());
                     intent.putExtra("image", post.getImage().getUrl());
                     intent.putExtra("timestamp", post.getRelativeTimestamp());
+
+                    ParseFile propic = post.getUser().getParseFile("propic");
+                    String propicUrl;
+                    if (propic != null) {
+                        propicUrl = post.getUser().getParseFile("propic").getUrl();
+                    } else {
+                        propicUrl = null;
+                    }
+                    intent.putExtra("propic", propicUrl);
                 // show the activity
                     context.startActivity(intent);
 //                }
