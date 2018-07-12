@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -37,8 +39,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View tweetView = inflater.inflate(R.layout.item_post, parent, false);
-        ViewHolder viewHolder = new ViewHolder(tweetView);
+        View postView = inflater.inflate(R.layout.item_post, parent, false);
+        ViewHolder viewHolder = new ViewHolder(postView);
         return viewHolder;
     }
 
@@ -53,23 +55,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvDescription.setText(post.getDescription());
 
-//        // Load favorite icon
-//        if (tweet.isFavorited()) {
-//            helper.favoriteImage(holder.ivFavorite);
-//        } else {
-//            helper.unfavoriteImage(holder.ivFavorite);
-//        }
-//
-//        // Load retweet icon
-//        if (tweet.isRetweeted()) {
-//            helper.retweetOn(holder.ivRetweet);
-//        } else {
-//            helper.retweetOff(holder.ivRetweet);
-//        }
-
         Glide.with(context)
                 .load(post.getImage().getUrl())
                 .into(holder.ivPicture);
+
+        ParseFile propic = post.getUser().getParseFile("propic");
+
+        if (propic != null) {
+            Glide.with(context)
+                    .load(propic.getUrl())
+                    .into(holder.ivPropic);
+        } else {
+            holder.ivPropic.setImageResource(R.drawable.ic_user_filled);
+        }
+
+
     }
 
     @Override
@@ -81,6 +81,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView ivPicture;
+        ImageView ivPropic;
         TextView tvUsername;
         TextView tvDescription;
 
@@ -90,6 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
+            ivPropic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
 
             itemView.setOnClickListener(this);
         }
