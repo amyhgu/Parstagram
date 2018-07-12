@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText passwordInput;
     private Button loginBtn;
     private Button signupBtn;
+    private int n = 0;
 
 
     @Override
@@ -81,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
         // Set core properties
         user.setUsername(username);
         user.setPassword(password);
-        user.setEmail("email@example.com");
+
+        String email = "email" + Integer.toString(n++) + "@codepath.com";
+        user.setEmail(email);
         // Invoke signUpInBackground
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
