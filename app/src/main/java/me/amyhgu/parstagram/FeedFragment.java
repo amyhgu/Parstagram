@@ -3,6 +3,8 @@ package me.amyhgu.parstagram;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,19 +18,25 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.amyhgu.parstagram.model.ClickListener;
 import me.amyhgu.parstagram.model.Post;
 
 public class FeedFragment extends Fragment {
 
-    FragmentActivity listener;
+    OnPostSelectedListener listener;
     RecyclerView rvPosts;
     static ArrayList<Post> posts;
     private PostAdapter postAdapter;
     private SwipeRefreshLayout swipeContainer;
+
+    public interface OnPostSelectedListener {
+        void onPostPropicSelected(ParseUser user);
+    }
 
 
     // This event fires 1st, before creation of fragment or any views
@@ -37,8 +45,11 @@ public class FeedFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof Activity){
-            this.listener = (FragmentActivity) context;
+        if (context instanceof OnPostSelectedListener) {
+            listener = (OnPostSelectedListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement FeedFragment.OnPostSelectedListener");
         }
     }
 
@@ -49,7 +60,12 @@ public class FeedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         posts = new ArrayList<>();
-        postAdapter = new PostAdapter(posts);
+        postAdapter = new PostAdapter(posts, new ClickListener() {
+            @Override
+            public void onPropicClicked(ParseUser user) {
+                listener.onPostPropicSelected(user);
+            }
+        });
     }
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
@@ -88,6 +104,10 @@ public class FeedFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         this.listener = null;
+    }
+
+    private void showUserProfile() {
+
     }
 
 

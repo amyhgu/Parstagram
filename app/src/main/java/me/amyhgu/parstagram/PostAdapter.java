@@ -20,16 +20,20 @@ import org.parceler.Parcels;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import me.amyhgu.parstagram.model.ClickListener;
 import me.amyhgu.parstagram.model.Post;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private List<Post> mPosts;
+    private final ClickListener listener;
     Context context;
 
     // pass in Tweets array in constructor
-    public PostAdapter(List<Post> posts) {
+    public PostAdapter(List<Post> posts, ClickListener listener) {
+
         mPosts = posts;
+        this.listener = listener;
     }
 
     // for each row, inflate the layout and cache references into ViewHolder
@@ -41,7 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View postView = inflater.inflate(R.layout.item_post, parent, false);
-        ViewHolder viewHolder = new ViewHolder(postView);
+        ViewHolder viewHolder = new ViewHolder(postView, listener);
         return viewHolder;
     }
 
@@ -86,16 +90,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ImageView ivPropic;
         TextView tvUsername;
         TextView tvDescription;
+        private WeakReference<ClickListener> listenerRef;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, ClickListener listener) {
             super(itemView);
             // perform findViewById lookups
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             ivPropic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            listenerRef = new WeakReference<>(listener);
 
             itemView.setOnClickListener(this);
+            ivPropic.setOnClickListener(this);
         }
 
         public void onClick(View view) {
@@ -105,13 +112,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             if (position != RecyclerView.NO_POSITION) {
                 // get the tweet at the position, this won't work if the class is static
                 Post post = mPosts.get(position);
-//                if (view.getId() == ivCompose.getId()) {
-//                    listenerRef.get().onComposeClicked(position, tweet.getUser().getScreenName());
+                if (view.getId() == ivPropic.getId()) {
+                    listenerRef.get().onPropicClicked(post.getUser());
 //                } else if (view.getId() == ivFavorite.getId()) {
 //                    helper.favoriteItem(tweet, client, ivFavorite);
 //                } else if (view.getId() == ivRetweet.getId()) {
 //                    helper.retweetItem(tweet, client, ivRetweet);
-//                } else {
+                } else {
                     // create intent for the new activity
                     Intent intent = new Intent(context, DetailsActivity.class);
                     // pass extras
@@ -130,7 +137,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     intent.putExtra("propic", propicUrl);
                 // show the activity
                     context.startActivity(intent);
-//                }
+                }
             }
         }
     }

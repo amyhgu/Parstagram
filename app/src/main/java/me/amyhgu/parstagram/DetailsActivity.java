@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.parceler.Parcels;
 
@@ -41,6 +42,7 @@ public class DetailsActivity extends AppCompatActivity {
         if (getIntent().getStringExtra("propic") != null) {
             Glide.with(DetailsActivity.this)
                     .load(getIntent().getStringExtra("propic"))
+                    .apply(RequestOptions.circleCropTransform())
                     .into(ivPropic);
         } else {
             ivPropic.setImageResource(R.drawable.ic_user_filled);

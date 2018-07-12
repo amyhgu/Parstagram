@@ -9,12 +9,14 @@ import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.amyhgu.parstagram.model.ClickListener;
 import me.amyhgu.parstagram.model.Post;
 
 public class FeedActivity extends AppCompatActivity {
@@ -32,7 +34,12 @@ public class FeedActivity extends AppCompatActivity {
         rvPosts = (RecyclerView) findViewById(R.id.rvPosts);
         posts = new ArrayList<>();
 
-        postAdapter = new PostAdapter(posts);
+        postAdapter = new PostAdapter(posts, new ClickListener() {
+            @Override
+            public void onPropicClicked(ParseUser user) {
+                return;
+            }
+        });
         // set up RecyclerView (layout manager, use adapter)
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);

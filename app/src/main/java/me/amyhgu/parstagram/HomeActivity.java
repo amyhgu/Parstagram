@@ -44,7 +44,7 @@ import java.util.List;
 import me.amyhgu.parstagram.model.Post;
 
 public class HomeActivity extends AppCompatActivity
-        implements CaptureFragment.OnCameraSelectedListener, ProfileFragment.OnItemSelectedListener {
+        implements CaptureFragment.OnCameraSelectedListener, ProfileFragment.OnItemSelectedListener, FeedFragment.OnPostSelectedListener {
 
     Fragment fragment1;
     Fragment fragment2;
@@ -117,6 +117,12 @@ public class HomeActivity extends AppCompatActivity
     public void onCreateButtonSelected() {
         FragmentTransaction fragmentTransactionFeed = getSupportFragmentManager().beginTransaction();
         fragmentTransactionFeed.replace(R.id.flContainer, new FeedFragment()).commit();
+    }
+
+    public void onPostPropicSelected(ParseUser user) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ProfileFragment profileFragment = ProfileFragment.newInstance(user);
+        ft.replace(R.id.flContainer, profileFragment).commit();
     }
 
     public void onProfilePictureSelected() {
