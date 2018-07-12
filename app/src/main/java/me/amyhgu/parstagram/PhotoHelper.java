@@ -16,12 +16,10 @@ import java.io.IOException;
 
 public class PhotoHelper {
 
-    Context context;
-    private static String imagePath = "";
     public static final String APP_TAG = "Parstagram";
     public static final int SOME_WIDTH = 720;
     public static String photoFileName = "photo.jpg";
-    static File photoFile;
+    public static String imagePath = "";
 
     // scale and keep aspect ratio
     public static Bitmap scaleToFitWidth(Bitmap b, int width)
@@ -68,9 +66,9 @@ public class PhotoHelper {
         }
 
         Log.d("CameraActivity", "loading successful");
-
         // Load the taken image into a preview
         return resizedBitmap;
+
     }
 
     // Returns the File for a photo stored on disk given the fileName

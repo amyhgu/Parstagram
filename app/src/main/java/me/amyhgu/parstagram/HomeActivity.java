@@ -143,38 +143,20 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-//    // Returns the File for a photo stored on disk given the fileName
-//    public File getPhotoFileUri(String fileName) {
-//        // Get safe storage directory for photos
-//        // Use `getExternalFilesDir` on Context to access package-specific directories.
-//        // This way, we don't need to request external read/write runtime permissions.
-//        File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-//
-//        // Create the storage directory if it does not exist
-//        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-//            Log.d(APP_TAG, "failed to create directory");
-//        }
-//
-//        // Return the file target for the photo based on filename
-//        File file = new File(mediaStorageDir.getPath() + File.separator + fileName);
-//
-//        return file;
-//    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 CaptureFragment fragment2 = (CaptureFragment) getSupportFragmentManager().findFragmentById(R.id.flContainer);
                 Bitmap previewBitmap = PhotoHelper.resizePhoto(photoFile, context);
-                fragment2.setPreviewImage(previewBitmap);
+                fragment2.setPreviewImage(previewBitmap, PhotoHelper.imagePath);
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         } else if (requestCode == CAPTURE_PROFILE_PICTURE_REQUEST_CODE) {
             ProfileFragment fragment3 = (ProfileFragment) getSupportFragmentManager().findFragmentById(R.id.flContainer);
             Bitmap propicBitmap = PhotoHelper.resizePhoto(photoFile, context);
-            fragment3.setProfilePicture(propicBitmap);
+            fragment3.setProfilePicture(propicBitmap, PhotoHelper.imagePath);
         }
     }
 }

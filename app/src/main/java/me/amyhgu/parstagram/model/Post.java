@@ -7,7 +7,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.ocpsoft.prettytime.PrettyTime;
-import org.parceler.Parcel;
 
 import java.util.Date;
 
