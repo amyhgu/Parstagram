@@ -89,6 +89,15 @@ public class FeedFragment extends Fragment {
         rvPosts.setAdapter(postAdapter);
         rvPosts.scrollToPosition(0);
         loadTopPosts();
+
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchTimelineAsync(0);
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 
     // This method is called after the parent Activity's onCreate() method has completed.
@@ -106,11 +115,6 @@ public class FeedFragment extends Fragment {
         super.onDetach();
         this.listener = null;
     }
-
-    private void showUserProfile() {
-
-    }
-
 
     private void loadTopPosts() {
         final Post.Query postsQuery = new Post.Query();
@@ -136,5 +140,16 @@ public class FeedFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void fetchTimelineAsync(int page) {
+        // Send the network request to fetch the updated data
+        // `client` here is an instance of Android Async HTTP
+        // getHomeTimeline is an example endpoint.
+        // Remember to CLEAR OUT old items before appending in the new ones
+        postAdapter.clear();
+        loadTopPosts();
+        // Now we call setRefreshing(false) to signal refresh has finished
+        swipeContainer.setRefreshing(false);
     }
 }
