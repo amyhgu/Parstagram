@@ -105,7 +105,6 @@ public class ProfileFragment extends Fragment {
 
         rvPostGrid = (RecyclerView) view.findViewById(R.id.rvPostGrid);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
-        layoutManager.setReverseLayout(true);
         rvPostGrid.setLayoutManager(layoutManager);
         rvPostGrid.setAdapter(gridAdapter);
         loadUserPosts();
@@ -193,11 +192,14 @@ public class ProfileFragment extends Fragment {
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
                     for (int i = 0; i < objects.size(); i++) {
+                        Log.d("ProfileFragment", "Post[" + i + "] = "
+                                + objects.get(i).getDescription()
+                                + "\nusername = " + objects.get(i).getUser().getUsername());
                         Post post = new Post();
                         post.setUser(objects.get(i).getUser());
                         post.setImage(objects.get(i).getImage());
                         post.setDescription(objects.get(i).getDescription());
-                        posts.add(post);
+                        posts.add(0, post);
                         gridAdapter.notifyItemInserted(posts.size() - 1);
                     }
                 } else {

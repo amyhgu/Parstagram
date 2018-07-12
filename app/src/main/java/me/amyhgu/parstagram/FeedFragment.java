@@ -84,6 +84,7 @@ public class FeedFragment extends Fragment {
         rvPosts = (RecyclerView) view.findViewById(R.id.rvPosts);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         rvPosts.setLayoutManager(layoutManager);
         rvPosts.setAdapter(postAdapter);
         rvPosts.scrollToPosition(0);
