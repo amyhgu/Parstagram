@@ -131,7 +131,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 if (view.getId() == ivPropic.getId()) {
                     listenerRef.get().onPropicClicked(post.getUser());
                 } else if (view.getId() == ivFavorite.getId()) {
-                    helper.handleFaves(post, ivFavorite);
+                    helper.handleFaves(post, ivFavorite, tvNumLikes);
 //                } else if (view.getId() == ivRetweet.getId()) {
 //                    helper.retweetItem(tweet, client, ivRetweet);
                 } else {

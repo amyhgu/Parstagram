@@ -69,7 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
         ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helper.handleFaves(post, ivFavorite);
+                helper.handleFaves(post, ivFavorite, tvNumLikes);
             }
         });
     }

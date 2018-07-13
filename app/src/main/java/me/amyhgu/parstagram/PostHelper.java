@@ -1,6 +1,7 @@
 package me.amyhgu.parstagram;
 
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -13,7 +14,7 @@ public class PostHelper {
 
     String username = ParseUser.getCurrentUser().getUsername();
 
-    public void handleFaves(Post post, ImageView ivHeart) {
+    public void handleFaves(Post post, ImageView ivHeart, TextView tvNumLikes) {
         List userFaves = post.getUserFaves();
         if (userFaves == null) {
             userFaves = new ArrayList();
@@ -32,6 +33,7 @@ public class PostHelper {
 
             ivHeart.setImageResource(R.drawable.ic_heart_active);
         }
+        tvNumLikes.setText(getLikesString(post));
     }
 
     public void setHeartImage(Post post, ImageView ivHeart) {
