@@ -18,15 +18,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -51,6 +54,7 @@ public class HomeActivity extends AppCompatActivity
     Fragment fragment2;
     Fragment fragment3;
     Context context;
+    MenuItem miActionProgressItem;
 
     public final String APP_TAG = "Parstagram";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
@@ -103,6 +107,17 @@ public class HomeActivity extends AppCompatActivity
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // Store instance of the menu item containing progress
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Extract the action-view from the menu item
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        // Return to finish
+        return super.onPrepareOptionsMenu(menu);
     }
 
     // Now we can define the action to take in the activity when the fragment event fires
@@ -168,5 +183,15 @@ public class HomeActivity extends AppCompatActivity
             Bitmap propicBitmap = PhotoHelper.resizePhoto(photoFile, context);
             fragment3.setProfilePicture(propicBitmap, PhotoHelper.imagePath);
         }
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        miActionProgressItem.setVisible(true);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        miActionProgressItem.setVisible(false);
     }
 }
