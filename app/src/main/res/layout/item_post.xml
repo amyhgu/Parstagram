@@ -9,9 +9,9 @@
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/ivProfilePic"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_toEndOf="@+id/tvCommentName"
         android:text="TextView"
         android:textStyle="bold" />
 
@@ -79,6 +79,14 @@
         android:layout_toEndOf="@+id/tvCommentName"
         android:layout_alignTop="@+id/tvCommentName"
         android:layout_marginLeft="5dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvUsername"
+        android:layout_below="@+id/tvUsername"
         android:text="TextView" />
 
 </RelativeLayout>

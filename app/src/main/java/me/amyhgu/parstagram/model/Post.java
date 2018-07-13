@@ -87,23 +87,6 @@ public class Post extends ParseObject {
 
     public String getRelativeTimestamp() {
         PrettyTime prettyTime = new PrettyTime();
-//        Date createdAt = getCreatedAt();
-//        Date date = new Date(0);
-
-//        Format formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-//        String s = formatter.format(createdAt);
-//        Log.d("Post created at", s);
-
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-//        try {
-//            date = dateFormat.parse(createdAt.toString());//You will get date object relative to server/client timezone wherever it is parsed
-//        } catch (ParseException e) {
-//            Log.e("Date", "Date parsing failed");
-//            e.printStackTrace();
-//        }
-
-//        Log.d("Pretty Time", prettyTime.format(getCreationTime()));
-
         return prettyTime.format(getCreatedAt());
     }
 

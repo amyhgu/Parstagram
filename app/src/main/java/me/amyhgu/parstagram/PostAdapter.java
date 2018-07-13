@@ -28,7 +28,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private List<Post> mPosts;
     private final ClickListener listener;
     Context context;
-    PostHelper helper;
 
     // pass in Tweets array in constructor
     public PostAdapter(List<Post> posts, ClickListener listener) {
@@ -44,7 +43,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        helper = new PostHelper();
 
         View postView = inflater.inflate(R.layout.item_post, parent, false);
         ViewHolder viewHolder = new ViewHolder(postView, listener);
@@ -62,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tvUsername.setText(post.getUser().getUsername());
         holder.tvDescription.setText(post.getDescription());
         holder.tvCommentName.setText(post.getUser().getUsername());
+        holder.tvTimestamp.setText(post.getRelativeTimestamp());
 
         Glide.with(context)
                 .load(post.getImage().getUrl())
@@ -95,6 +94,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView tvUsername;
         TextView tvDescription;
         TextView tvCommentName;
+        TextView tvTimestamp;
         private WeakReference<ClickListener> listenerRef;
 
         public ViewHolder(View itemView, ClickListener listener) {
@@ -103,6 +103,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             tvCommentName = (TextView) itemView.findViewById(R.id.tvCommentName);
+            tvTimestamp = (TextView) itemView.findViewById(R.id.tvTimestamp);
+
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             ivPropic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
             ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
@@ -123,8 +125,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 if (view.getId() == ivPropic.getId()) {
                     listenerRef.get().onPropicClicked(post.getUser());
                 } else if (view.getId() == ivFavorite.getId()) {
-                    post.setIsFave();
-                    post.setNumFaves();
+                    post.addUserFave(ParseUser.getCurrentUser());
 //                } else if (view.getId() == ivRetweet.getId()) {
 //                    helper.retweetItem(tweet, client, ivRetweet);
                 } else {
