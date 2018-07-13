@@ -109,17 +109,6 @@ public class HomeActivity extends AppCompatActivity
         });
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // Store instance of the menu item containing progress
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        miActionProgressItem = menu.findItem(R.id.miActionProgress);
-        // Extract the action-view from the menu item
-        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
-        // Return to finish
-        return super.onPrepareOptionsMenu(menu);
-    }
-
     // Now we can define the action to take in the activity when the fragment event fires
     // This is implementing the `OnItemSelectedListener` interface methods
     @Override
@@ -183,15 +172,5 @@ public class HomeActivity extends AppCompatActivity
             Bitmap propicBitmap = PhotoHelper.resizePhoto(photoFile, context);
             fragment3.setProfilePicture(propicBitmap, PhotoHelper.imagePath);
         }
-    }
-
-    public void showProgressBar() {
-        // Show progress item
-        miActionProgressItem.setVisible(true);
-    }
-
-    public void hideProgressBar() {
-        // Hide progress item
-        miActionProgressItem.setVisible(false);
     }
 }

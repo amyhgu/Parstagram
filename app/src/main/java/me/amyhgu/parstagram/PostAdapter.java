@@ -132,33 +132,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     listenerRef.get().onPropicClicked(post.getUser());
                 } else if (view.getId() == ivFavorite.getId()) {
                     helper.handleFaves(post, ivFavorite, tvNumLikes);
-//                } else if (view.getId() == ivRetweet.getId()) {
-//                    helper.retweetItem(tweet, client, ivRetweet);
                 } else {
-                    // create intent for the new activity
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    // pass extras
                     intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
-//                    intent.putExtra("username", post.getUser().getUsername());
-//                    intent.putExtra("description", post.getDescription());
-//                    intent.putExtra("image", post.getImage().getUrl());
-//                    intent.putExtra("timestamp", post.getRelativeTimestamp());
-//
-//                    ParseFile propic = post.getUser().getParseFile("propic");
-//                    String propicUrl;
-//                    if (propic != null) {
-//                        propicUrl = post.getUser().getParseFile("propic").getUrl();
-//                    } else {
-//                        propicUrl = null;
-//                    }
-//                    intent.putExtra("propic", propicUrl);
-                // show the activity
                     context.startActivity(intent);
                 }
             }
         }
     }
-
 
     // Clean all elements of the recycler
     public void clear() {

@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -88,7 +89,10 @@ public class FeedFragment extends Fragment {
         rvPosts.setLayoutManager(layoutManager);
         rvPosts.setAdapter(postAdapter);
         rvPosts.scrollToPosition(0);
+        ProgressBar pb = (ProgressBar) view.findViewById(R.id.pbLoading);
+        pb.setVisibility(ProgressBar.VISIBLE);
         loadTopPosts();
+        pb.setVisibility(ProgressBar.INVISIBLE);
 
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
