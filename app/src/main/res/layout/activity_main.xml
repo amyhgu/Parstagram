@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
-        android:background="@color/action_bar_semi_transparent_white"
+        android:background="@android:drawable/editbox_background_normal"
         android:text="Login" />
 
     <Button
@@ -49,6 +49,6 @@
         android:layout_below="@+id/btLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-5dp"
-        android:background="@color/action_bar_semi_transparent_white"
+        android:background="@android:drawable/editbox_background_normal"
         android:text="Sign up" />
 </RelativeLayout>

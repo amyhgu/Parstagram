@@ -28,6 +28,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private List<Post> mPosts;
     private final ClickListener listener;
     Context context;
+    PostHelper helper;
 
     // pass in Tweets array in constructor
     public PostAdapter(List<Post> posts, ClickListener listener) {
@@ -43,6 +44,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+        helper = new PostHelper();
 
         View postView = inflater.inflate(R.layout.item_post, parent, false);
         ViewHolder viewHolder = new ViewHolder(postView, listener);
@@ -89,6 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView ivPicture;
         ImageView ivPropic;
+        ImageView ivFavorite;
         TextView tvUsername;
         TextView tvDescription;
         TextView tvCommentName;
@@ -102,10 +105,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvCommentName = (TextView) itemView.findViewById(R.id.tvCommentName);
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             ivPropic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            ivFavorite = (ImageView) itemView.findViewById(R.id.ivFavorite);
             listenerRef = new WeakReference<>(listener);
 
             itemView.setOnClickListener(this);
             ivPropic.setOnClickListener(this);
+            ivFavorite.setOnClickListener(this);
         }
 
         public void onClick(View view) {
@@ -117,8 +122,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 Post post = mPosts.get(position);
                 if (view.getId() == ivPropic.getId()) {
                     listenerRef.get().onPropicClicked(post.getUser());
-//                } else if (view.getId() == ivFavorite.getId()) {
-//                    helper.favoriteItem(tweet, client, ivFavorite);
+                } else if (view.getId() == ivFavorite.getId()) {
+                    post.setIsFave();
+                    post.setNumFaves();
 //                } else if (view.getId() == ivRetweet.getId()) {
 //                    helper.retweetItem(tweet, client, ivRetweet);
                 } else {

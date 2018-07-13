@@ -124,17 +124,8 @@ public class FeedFragment extends Fragment {
             @Override
             public void done(List<Post> objects, ParseException e) {
                 if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("HomeActivity", "Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
-                        Post post = new Post();
-                        post.setUser(objects.get(i).getUser());
-                        post.setImage(objects.get(i).getImage());
-                        post.setDescription(objects.get(i).getDescription());
-                        posts.add(post);
-                        postAdapter.notifyItemInserted(posts.size() - 1);
-                    }
+                    posts.addAll(objects);
+                    postAdapter.notifyDataSetChanged();
                 } else {
                     e.printStackTrace();
                 }
