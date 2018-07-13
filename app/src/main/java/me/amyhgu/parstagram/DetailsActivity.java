@@ -22,6 +22,8 @@ public class DetailsActivity extends AppCompatActivity {
     TextView tvUsername;
     TextView tvDescription;
     TextView tvTimestamp;
+    TextView tvCommentName;
+    TextView tvNumLikes;
     ImageView ivPicture;
     ImageView ivPropic;
     ImageView ivFavorite;
@@ -35,6 +37,8 @@ public class DetailsActivity extends AppCompatActivity {
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvTimestamp = (TextView) findViewById(R.id.tvTimestamp);
+        tvCommentName = (TextView) findViewById(R.id.tvCommentName);
+        tvNumLikes = (TextView) findViewById(R.id.tvNumLikes);
         ivPicture = (ImageView) findViewById(R.id.ivPicture);
         ivPropic = (ImageView) findViewById(R.id.ivProfilePic);
         ivFavorite = (ImageView) findViewById(R.id.ivFavorite);
@@ -44,6 +48,8 @@ public class DetailsActivity extends AppCompatActivity {
         tvUsername.setText(post.getUser().getUsername());
         tvDescription.setText(post.getDescription());
         tvTimestamp.setText(post.getRelativeTimestamp());
+        tvCommentName.setText(post.getUser().getUsername());
+        tvNumLikes.setText(helper.getLikesString(post));
 
         Glide.with(DetailsActivity.this)
                 .load(post.getImage().getUrl())

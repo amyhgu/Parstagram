@@ -21,9 +21,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_toEndOf="@+id/ivProfilePic"
+                android:layout_marginTop="12dp"
+                android:layout_toEndOf="@+id/tvCommentName"
+                android:layout_marginLeft="20dp"
                 android:text="TextView"
                 android:textStyle="bold" />
 
@@ -33,35 +33,29 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/ivProfilePic"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 app:srcCompat="@color/ig_yellow" />
 
             <TextView
-                android:id="@+id/tvDescription"
+                android:id="@+id/tvCommentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/ivFavorite"
-                android:layout_margin="5dp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/tvTimestamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/tvDescription"
-                android:layout_margin="5dp"
-                android:text="TextView" />
+                android:layout_below="@+id/tvNumLikes"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="TextView"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/ivProfilePic"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 app:srcCompat="@drawable/ic_user_filled" />
 
             <ImageView
@@ -71,15 +65,15 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/ivPicture"
                 android:layout_margin="5dp"
-                app:srcCompat="@drawable/ic_heart" />
+                app:srcCompat="@drawable/ic_direct_message_filled" />
 
             <ImageView
                 android:id="@+id/ivComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ivPicture"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@+id/ivFavorite"
                 app:srcCompat="@drawable/ic_ufi_comment" />
 
@@ -89,9 +83,35 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/ivPicture"
-                android:layout_centerVertical="true"
                 android:layout_margin="5dp"
                 app:srcCompat="@drawable/ic_save" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/tvCommentName"
+                android:layout_alignTop="@+id/tvCommentName"
+                android:layout_marginLeft="5dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tvTimestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@+id/tvCommentName"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tvNumLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivFavorite"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentStart="true"
+                android:text="TextView" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

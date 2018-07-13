@@ -44,4 +44,10 @@ public class PostHelper {
             ivHeart.setImageResource(R.drawable.ic_heart);
         }
     }
+
+    public String getLikesString(Post post) {
+        List faves = post.getUserFaves();
+        int numLikes = (faves == null) ? 0 : faves.size();
+        return String.format("%s likes", Integer.toString(numLikes));
+    }
 }

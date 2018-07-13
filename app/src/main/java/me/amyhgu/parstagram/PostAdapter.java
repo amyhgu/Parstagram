@@ -62,6 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tvDescription.setText(post.getDescription());
         holder.tvCommentName.setText(post.getUser().getUsername());
         holder.tvTimestamp.setText(post.getRelativeTimestamp());
+        holder.tvNumLikes.setText(helper.getLikesString(post));
 
         helper.setHeartImage(post, holder.ivFavorite);
 
@@ -98,6 +99,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView tvDescription;
         TextView tvCommentName;
         TextView tvTimestamp;
+        TextView tvNumLikes;
         private WeakReference<ClickListener> listenerRef;
 
         public ViewHolder(View itemView, ClickListener listener) {
@@ -107,6 +109,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             tvCommentName = (TextView) itemView.findViewById(R.id.tvCommentName);
             tvTimestamp = (TextView) itemView.findViewById(R.id.tvTimestamp);
+            tvNumLikes = (TextView) itemView.findViewById(R.id.tvNumLikes);
 
             ivPicture = (ImageView) itemView.findViewById(R.id.ivPicture);
             ivPropic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
