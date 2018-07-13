@@ -58,32 +58,10 @@ public class Post extends ParseObject {
         return getList(KEY_FAVES);
     }
 
-    public void addUserFave(ParseUser user) {
-        List userFaves = getUserFaves();
-        userFaves.add(user);
-        put(KEY_FAVES, userFaves);
+    public void setUserFaves(List users) {
+        put(KEY_FAVES, users);
+        saveInBackground();
     }
-
-//    public Boolean getIsFave() { return getBoolean(KEY_IS_FAVE); }
-//
-//    public void setIsFave() {
-//        if (getIsFave()) {
-//            put(KEY_IS_FAVE, false);
-//        } else {
-//            put(KEY_IS_FAVE, true);
-//        }
-//    }
-//
-//    public int getNumFaves() { return getInt(KEY_NUM_FAVES); };
-//
-//    public void setNumFaves() {
-//        int n = getNumFaves();
-//        if (getIsFave()) {
-//            put(KEY_NUM_FAVES, n + 1);
-//        } else {
-//            put(KEY_NUM_FAVES, n - 1);
-//        }
-//    }
 
     public String getRelativeTimestamp() {
         PrettyTime prettyTime = new PrettyTime();

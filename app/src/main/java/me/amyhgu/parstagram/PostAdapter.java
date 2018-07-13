@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseFile;
-import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -27,6 +26,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private List<Post> mPosts;
     private final ClickListener listener;
+    private PostHelper helper;
     Context context;
 
     // pass in Tweets array in constructor
@@ -43,6 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
+        helper = new PostHelper();
 
         View postView = inflater.inflate(R.layout.item_post, parent, false);
         ViewHolder viewHolder = new ViewHolder(postView, listener);
@@ -61,6 +62,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.tvDescription.setText(post.getDescription());
         holder.tvCommentName.setText(post.getUser().getUsername());
         holder.tvTimestamp.setText(post.getRelativeTimestamp());
+
+        helper.setHeartImage(post, holder.ivFavorite);
 
         Glide.with(context)
                 .load(post.getImage().getUrl())
@@ -125,26 +128,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 if (view.getId() == ivPropic.getId()) {
                     listenerRef.get().onPropicClicked(post.getUser());
                 } else if (view.getId() == ivFavorite.getId()) {
-                    post.addUserFave(ParseUser.getCurrentUser());
+                    helper.handleFaves(post, ivFavorite);
 //                } else if (view.getId() == ivRetweet.getId()) {
 //                    helper.retweetItem(tweet, client, ivRetweet);
                 } else {
                     // create intent for the new activity
                     Intent intent = new Intent(context, DetailsActivity.class);
                     // pass extras
-                    intent.putExtra("username", post.getUser().getUsername());
-                    intent.putExtra("description", post.getDescription());
-                    intent.putExtra("image", post.getImage().getUrl());
-                    intent.putExtra("timestamp", post.getRelativeTimestamp());
-
-                    ParseFile propic = post.getUser().getParseFile("propic");
-                    String propicUrl;
-                    if (propic != null) {
-                        propicUrl = post.getUser().getParseFile("propic").getUrl();
-                    } else {
-                        propicUrl = null;
-                    }
-                    intent.putExtra("propic", propicUrl);
+                    intent.putExtra(Post.class.getSimpleName(), Parcels.wrap(post));
+//                    intent.putExtra("username", post.getUser().getUsername());
+//                    intent.putExtra("description", post.getDescription());
+//                    intent.putExtra("image", post.getImage().getUrl());
+//                    intent.putExtra("timestamp", post.getRelativeTimestamp());
+//
+//                    ParseFile propic = post.getUser().getParseFile("propic");
+//                    String propicUrl;
+//                    if (propic != null) {
+//                        propicUrl = post.getUser().getParseFile("propic").getUrl();
+//                    } else {
+//                        propicUrl = null;
+//                    }
+//                    intent.putExtra("propic", propicUrl);
                 // show the activity
                     context.startActivity(intent);
                 }
