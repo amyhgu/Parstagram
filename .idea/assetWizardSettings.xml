@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Desktop/instagram_text_logo.png" />
-                                      <entry key="outputName" value="ic_instagram_black_logo" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/instagram_android_assets/drawable-xxhdpi/camera_shadow_fill.png" />
+                                      <entry key="outputName" value="ic_camera_shadow" />
                                     </map>
                                   </option>
                                 </PersistentState>

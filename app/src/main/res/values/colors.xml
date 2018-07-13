@@ -78,9 +78,9 @@
     <color name="bugreporter_update_warning_background">#ffc7c7c7</color>
     <color name="button_press_background">#1f3897f0</color>
     <color name="button_text_disabled_color">#663897f0</color>
-    <color name="camera_gradient_center">#80d73889</color>
-    <color name="camera_gradient_end">#80fd8d32</color>
-    <color name="camera_gradient_start">#80a307ba</color>
+    <color name="camera_gradient_center">#d73889</color>
+    <color name="camera_gradient_end">#fd8d32</color>
+    <color name="camera_gradient_start">#a307ba</color>
     <color name="camera_shelf_background">@color/black_30_transparent</color>
     <color name="capture_textview_text_color">#feffffff</color>
     <color name="catalyst_redbox_background">#eecc0000</color>
@@ -262,7 +262,7 @@
     <color name="transparent">#00000000</color>
     <color name="tray_avatar_white_border_color">@color/white</color>
     <color name="tray_item_border_color">@color/black</color>
-    <color name="white">#ffffffff</color>
+    <color name="white">#ffffff</color>
     <color name="white_10_transparent">#1affffff</color>
     <color name="white_20_transparent">#33ffffff</color>
     <color name="white_25_transparent">#40ffffff</color>

@@ -38,7 +38,7 @@ public class CaptureFragment extends Fragment {
     private OnCameraSelectedListener listener;
     private EditText descriptionInput;
     private Button createButton;
-    private Button cameraButton;
+    private ImageView cameraButton;
     private ImageView ivPreview;
     String imgPath = null;
 
