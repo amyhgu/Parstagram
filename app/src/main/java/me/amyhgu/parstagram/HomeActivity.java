@@ -77,6 +77,9 @@ public class HomeActivity extends AppCompatActivity
         fragment3 = new ProfileFragment();
         context = getApplicationContext();
 
+        FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
+        fragmentTransaction1.replace(R.id.flContainer, fragment1).commit();
+
         if (Build.VERSION.SDK_INT >= 23) {
             int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
