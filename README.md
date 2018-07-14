@@ -37,7 +37,6 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Make use of Parcelable
-- [ ] Use Butterknife to reduce boilerplate
 - [x] User can like a post and see number of likes in feed
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
