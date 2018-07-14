@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         user.setUsername(username);
         user.setPassword(password);
 
-        String email = "email" + Integer.toString(3) + "@codepath.com";
+        String email = "email" + Integer.toString(n++) + "@codepath.com";
         user.setEmail(email);
         // Invoke signUpInBackground
         user.signUpInBackground(new SignUpCallback() {

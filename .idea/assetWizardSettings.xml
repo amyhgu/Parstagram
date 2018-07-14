@@ -19,18 +19,45 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/instagram_android_assets/drawable-xxhdpi/camera_shadow_fill.png" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/instagram_android_assets/icon.png" />
                                       <entry key="outputName" value="ic_camera_shadow" />
+                                      <entry key="theme" value="CUSTOM" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
+                            <entry key="launcher">
+                              <value>
+                                <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="foregroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="73" />
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="backgroundLayerName" value="ic_instagram_launcher_bg" />
+                                      <entry key="foregroundImage" value="$PROJECT_DIR$/instagram_android_assets/icon.png" />
+                                      <entry key="foregroundLayerName" value="ic_instagram_launcher" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </PersistentState>

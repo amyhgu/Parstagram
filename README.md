@@ -31,23 +31,26 @@ The following **optional** features are implemented:
 - [x] User can like a post and see number of likes for each post in the post details screen.
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
 - [ ] Create a custom Camera View on your phone.
-- [ ] Run your app on your phone and use the camera to take the photo
+- [x] Run your app on your phone and use the camera to take the photo
 
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Make use of Parcelable
+- [ ] Use Butterknife to reduce boilerplate
+- [x] User can like a post and see number of likes in feed
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Ways to abstract out common functionality (camera, likes/comments in feed and detail view)
+2. Most efficient way to have feed refresh whenever something changes (e.g. a post is liked in detail view)
+3. Elegant way to handle going "down more layers" - e.g. user clicks username in feed, sees user profile, clicks posts in that profile, clicks another user's name from the comments, etc.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='parstagram-walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -60,7 +63,10 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+- It took a lot of time and effort to abstract out camera functionality such that it could be used for creating new posts and changing profile pictures
+- Still haven't quite figured out the following:
+  1. State list drawables (how to make filled-in icon persist after the moment the icon is pressed)
+  2. Changing home screen icon (looks weirdly cropped)
 
 ## License
 
